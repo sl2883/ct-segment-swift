@@ -1,0 +1,6 @@
+framework module Pods_CT3Test {
+  umbrella header "Pods-CT3Test-umbrella.h"
+
+  export *
+  module * { export * }
+}
