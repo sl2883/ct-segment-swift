@@ -19,16 +19,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CleverTapInAppNotificatio
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)
         let configuration = AnalyticsConfiguration(writeKey: "dcUHEYgeOcQOTWXWXquMCW0pws0KHuE7")
-        configuration.trackApplicationLifecycleEvents = true // Enable this to record certain application events automatically!
-        configuration.recordScreenViews = true // Enable this to record screen views automatically!
         
         configuration.use(SEGCleverTapIntegrationFactory())
+        configuration.trackApplicationLifecycleEvents = true // Enable this to record certain application events automatically!
+        configuration.recordScreenViews = true // Enable this to record screen views automatically!
+        configuration.trackPushNotifications = true
+        
+        
         Analytics.setup(with: configuration)
-//
         // Override point for customization after application launch.
-        CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)
-        CleverTap.autoIntegrate()
+        
+        //CleverTap.autoIntegrate()
+        CleverTap.sharedInstance()?.enableDeviceNetworkInfoReporting(true)
         
         return true
     }
